@@ -1,0 +1,106 @@
+*
+	box-sizing: border-box
+	margin: 0
+	padding: 0
+	outline: 0
+	font-size: 16px
+	color: #000
+	text-decoration: none
+body
+	width: 100%
+	height: 100%
+	background: $light
+	user-select: none
+	font-family: PingFangTC-Regular,PingFangSC-Regular,微軟正黑體,微軟雅黑體,Roboto,Arial
+.ta-left
+	text-align: left
+.ta-right
+	text-align: right
+.ta-center
+	text-align: center
+.fz-0
+	font-size: 0 !important
+@for $i from 6 through 12
+	.fz-#{$i * 2}
+		font-size: 2px * $i !important
+.op-60
+	opacity: 0.6 !important
+.fw-bold
+	font-weight: bold !important
+.text-primary
+	color: $primary
+.text-secondary
+	color: $secondary
+.t-0
+	top: 0 !important
+.m-0
+	margin: 0 !important
+.mb-12
+	margin-bottom: 12px !important
+.p-0
+	padding: 0 !important
+span
+	overflow-wrap: break-word
+	word-wrap: break-word
+li
+	list-style: none
+hr
+	width: calc(100% - 12px * 2)
+	margin: 30px auto
+	border-color: $primary
+input
+	width: 100%
+	height: 36px
+	padding: 0 12px
+	margin-bottom: 8px
+	border-radius: 4px
+	border: 0
+	background: transparent
+	box-shadow: none
+	color: $primary
+	appearance: none
+	&[type="date"],&[type="time"]
+		&::-webkit-inner-spin-button
+			appearance: none
+			display: none
+		+ span
+			position: absolute
+			left: 112px
+			top: 50%
+			transform: translateY(-50%)
+			color: #aaa
+		&:focus + span, &:checked + span, &:valid + span
+			display: none
+textarea
+	width: calc(100% - 88px)
+	padding: 8px
+	margin: 8px 0
+	border: 0
+	border-radius: 4px
+	font-size: 14px
+	color: $primary
+	resize: none
+	&::placeholder
+		font-size: 14px
+		color: #aaa
+.btn
+	width: calc(100% - 12px * 2)
+	height: 48px
+	line-height: 48px
+	margin: 16px 12px
+	border-radius: 4px
+	background: $primary
+	text-align: center
+	span
+		color: $white
+.row
+	display: inline-flex
+	align-items: center
+	justify-content: space-between
+	width: 100%
+	padding: 12px 0
+	flex-wrap: wrap
+@for $i from 1 through 12
+	.col-#{$i}
+		width: 100% / 12 * $i !important
+		flex: 0 0 100% / 12 * $i

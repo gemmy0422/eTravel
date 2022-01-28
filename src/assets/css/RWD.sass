@@ -1,0 +1,84 @@
+@import 'var'
+@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)
+    .goToPage.goToHistory
+        right: 17% !important
+    .container
+        width: 70%
+        margin: 0 auto
+    .tabsGroup
+        padding: 0 10% !important
+        &::before
+            width: 100% !important
+            height: 18px !important
+            border: 0 !important
+            background: $primary
+    .pd-md-12
+        padding: 0 12px
+    .row-md
+        justify-content: center
+        align-items: flex-start
+    @for $i from 1 through 12
+        .col-md-#{$i}
+            width: 100% / 12 * $i !important
+            flex: 0 0 100% / 12 * $i
+    .xs-mb-30
+        margin-bottom: 0 !important
+
+    // history
+    .goToPage.goToHome
+        left: 15% !important
+@media only screen and (min-width: 800px) and (-webkit-min-device-pixel-ratio: 1)
+    .goToPage.goToHistory
+        right: 17% !important
+    .container
+        width: 70%
+        margin: 0 auto
+    .tabsGroup
+        padding: 0 20% !important
+        &::before
+            width: 100% !important
+            height: 18px !important
+            border: 0 !important
+            background: $primary
+    .separateLine
+        display: none !important
+    .card
+        margin-bottom: 12px !important
+    .row-lg
+        display: inline-flex
+        align-items: flex-start
+        justify-content: space-between
+        width: 100%
+        padding: 12px 12px 0
+    @for $i from 1 through 12
+        .col-lg-#{$i}
+            width: 100% / 12 * $i !important
+            flex: 0 0 100% / 12 * $i
+    .btn
+        height: 48px
+        line-height: 48px
+        
+    // history
+    .goToPage.goToHome
+        left: 15%
+    
+    // footer
+    .footer > .row
+        width: 70%
+        align-items: flex-start
+    .footer_title
+        line-height: 2
+    .xs-mb-30
+        margin-bottom: 0 !important
+@media only screen and (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 1)
+    .container
+        width: 50%
+        margin: 0 auto
+    .goToPage.goToHistory
+        right: 27% !important
+    .tabsGroup
+        padding: 0 30% !important
+    .footer > .row
+        width: 50%
+    .goToPage.goToHome
+        left: 25%
