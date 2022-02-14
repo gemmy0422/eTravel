@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import historyHeader from "../components/history_header";
-import historyContent from "../components/history_content";
+import historyHeader from "../components/history/history_header";
+import historyContent from "../components/history/history_content";
 
 export default {
 	components: {

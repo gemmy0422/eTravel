@@ -1,159 +1,186 @@
 <template>
-	<div class="container">
-		<div class="header">
-			<span class="">已經預訂行程了嗎?</span>
-			<a href="javascript:;" class="goToPage goToHistory" @click="goToHistory">
-				<span class="fz-14">前往紀錄</span>
-				<img :src="imgGoToHistory" alt="goToHistory">
-			</a>
-		</div>
-		<div class="tabsGroup" :class="{scroll: positionY}">
-			<button class="tab ta-center" :class="{active: componentType == 'planeTicket'}" @click="componentType = 'planeTicket'" v-scroll-to="'#app'">
-				<div class="tab_img">
-					<img :src="imgPlane" alt="hotel">
-				</div>
-				<span>機票</span>
-			</button>
-			<button class="tab ta-center" :class="{active: componentType == 'hotel'}" @click="componentType = 'hotel'" v-scroll-to="'#app'">
-				<div class="tab_img">
-					<img :src="imgHotel" alt="hotel">
-				</div>
-				<span>飯店</span>
-			</button>
-			<button class="tab ta-center" :class="{active: componentType == 'rentCar'}" @click="componentType = 'rentCar'" v-scroll-to="'#app'">
-				<div class="tab_img">
-					<img :src="imgRentCar" alt="rentCar">
-				</div>
-				<span>租車</span>
-			</button>
-		</div>
-		<div class="content">
-			<bookType ref="bookType" v-bind:componentType="componentType"></bookType>
-		</div>
-		<infoForm ref="infoForm"></infoForm>
-		<div class="btn" @click="confirmSend()">
-			<span>確認送出</span>
-		</div>
-	</div>
+  <div class="container">
+    <div class="header">
+      <span class="">已經預訂行程了嗎?</span>
+      <a href="javascript:;" class="goToPage goToHistory" @click="goToHistory">
+        <span class="fz-14">前往紀錄</span>
+        <img :src="imgGoToHistory" alt="goToHistory">
+      </a>
+    </div>
+    <div class="tabsGroup" :class="{scroll: positionY}">
+      <button v-for="(item, index) in tabs" :key="index" class="tab ta-center"
+       :class="{active: componentType === item.componentType}"
+       @click="componentType = item.componentType" v-scroll-to="'#app'">
+        <div class="tab_img">
+          <img :src="item.img" :alt=item.componentType>
+        </div>
+        <span>{{ item.typeTitle }}</span>
+      </button>
+    </div>
+    <div class="content">
+      <planeTicket v-if="componentType === 'planeTicket'" @planeTicketVal=bookDataVal />
+      <hotel v-if="componentType === 'hotel'" @hotelVal=bookDataVal />
+      <rentCar v-if="componentType === 'rentCar'" @rentCarVal=bookDataVal />
+    </div>
+    <div class="infoForm">
+      <div class="separateLine" v-scroll-to="'#idSection'">
+        <hr>
+        <img :src="imgScrollDown" alt="scrollDown">
+        <hr>
+      </div>
+      <div class="pd-md-12 row-lg">
+        <contact @contactVal=contactVal />
+        <note @noteVal=noteVal />
+      </div>
+    </div>
+    <div class="btn" :class="{'block': isPosting}" @click="confirmSend()">
+      <span>確認送出</span>
+    </div>
+  </div>
 </template>
 
 <script>
-import infoForm from '../components/infoForm'
-import bookType from '../components/bookType'
-import axios from 'axios'
+import { mapActions } from 'vuex'
+import contact from '@/components/contact'
+import note from '@/components/note'
+import planeTicket from '@/components/planeTicket'
+import hotel from '@/components/hotel'
+import rentCar from '@/components/rentCar'
+import { formatISO } from 'date-fns'
+import { dataUrl_post } from '@/api/api'
 
 export default {
-	name: 'Home',
-	components: {
-		infoForm,
-		bookType,
-	},
-	data(){
-		return{
-			imgGoToHistory: require('@/assets/images/arrow-right-white.png'),
-			imgPlane: require('@/assets/images/airplane.svg'),
-			imgHotel: require('@/assets/images/bed.svg'),
-			imgRentCar: require('@/assets/images/car.svg'),
-
-			componentType: 'planeTicket',
-			positionY: 0,
-			testObj: {}
-		}
-	},
-	methods:{
-		confirmSend(){
-			let book = this.$refs.bookType.$children[0].book;
-			let mainContact = this.$refs.infoForm.mainContact;
-			let note = this.$refs.infoForm.note;
-			// let d = function(){ // 選租車需隱藏
-			// 	this.componentType == 'rentCar'? false : this.$refs.infoForm.$children[0].guestInfo
-			// };
-			let frontWord = this.componentType == 'planeTicket'? '票-' : this.componentType == 'hotel' ? '住-' : '租-';
-			let stateRandom = function(){
-				let randomNum = Math.floor(Math.random()*10) % 3
-				if(randomNum == 0) return '待處理'
-				else if(randomNum == 1) return '處理中'
-				else return '已處理'
-			}
-			let date = {
-				toggleItem: false,
-				bookNumber: frontWord + Math.floor(Math.random()*10000),
-				bookDate: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`,
-				state: stateRandom(),
-			};
-
-			// 預訂選項判斷
-			if(this.$refs.bookType.$children[0].isSingle == true){
-				[book.planeTicket.terminalDate, book.planeTicket.terminalTime, book.planeTicket.terminalWeekDay] = ["null","null","null"]
-			}
-			let IdentifyA = Object.values(Object.values(book)[0]).map(function(val){
-				if(typeof(val) == "number"){
-					if(val > -1) return true
-					else return
-				}else{
-					if(val.length > 0) return true
-					else return
-				}
-			}).every(val => val == true);
-
-			// 聯絡人資料判斷
-			let IdentifyB = Object.values(mainContact).every(val => val.length > 0);
-
-			// 備註修正
-			note.content.length > 0 ? note.content : note.content = "無"
-
-			if(!IdentifyA && !IdentifyB){
-				alert("預訂選項及聯絡人資料未填寫正確");
-				return false;
-			}else if(!IdentifyA){
-				alert("預定選項未填寫正確");
-				return false;
-			}else if(!IdentifyB){
-				alert("聯絡人資料未填寫正確");
-				return false;
-			}else{
-				this.testObj = Object.assign(book,mainContact,note,date)
-			}
-
-			axios.post("https://etravel-f011c.firebaseio.com/data.json",this.testObj).then((res) => {
-				this.$store.commit("addContent", res.data)
-			}).then(() => {
-				this.$router.go(0);
-				window.scrollTo(0,0);
-			})
-		},
-
-		goToHistory(){
-			this.$router.push({name: "History"});
-		}
-	},
-	mounted(){
-		window.addEventListener('scroll', () => {
-			let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || document.querySelector('#app').scrollTop;
-			if (scrollTop >= 48) {
-				this.positionY = true
-			} else {
-				this.positionY = false
-			}
-		});
-	},
-	beforeDestroy(){
-		window.removeEventListener('scroll')
-	}
+  name: 'Home',
+  components: {
+    contact,
+    note,
+    planeTicket,
+		hotel,
+		rentCar,
+  },
+  data(){
+    return{
+      imgGoToHistory: require('@/assets/images/arrow-right-white.png'),
+      imgScrollDown: require('@/assets/images/down-chevron.svg'),
+      tabs: [
+        {
+          img: require('@/assets/images/airplane.svg'),
+          typeTitle: '機票',
+          componentType: 'planeTicket'
+        },
+        {
+          img: require('@/assets/images/bed.svg'),
+          typeTitle: '飯店',
+          componentType: 'hotel'
+        },
+        {
+          img: require('@/assets/images/car.svg'),
+          typeTitle: '租車',
+          componentType: 'rentCar'
+        },
+      ],
+      componentType: 'planeTicket',
+      positionY: 0,
+      bookData: false,
+      mainContact: false,
+      note: '',
+      scrollFn: null,
+      isPosting: false
+    }
+  },
+  computed: {
+    stateRandom(){
+      return `${Math.floor(Math.random() * 10) % 3}`
+    },
+    stateConvert(){
+      return this.stateRandom === 0 ? '待處理' : this.stateRandom === 1 ? '處理中' : '已處理'
+    }
+  },
+  mounted(){
+    this.scrollFn = () => {
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || document.querySelector('#app').scrollTop;
+      if (scrollTop >= 48) {
+        this.positionY = true
+      } else {
+        this.positionY = false
+      }
+    }
+    window.addEventListener('scroll', this.scrollFn)
+  },
+  methods:{
+    ...mapActions(['MSG_POPUP_HANDLER']),
+    goToHistory(){
+      this.$router.push({name: "History"})
+    },
+    // emit
+    bookDataVal(val){
+      this.bookData = val
+    },
+    contactVal(val){
+      this.mainContact = val
+    },
+    noteVal(val){
+      this.note = val
+    },
+    confirmSend(){
+      if(this.isPosting) return
+      // data判斷
+      if(this.bookData === false && this.mainContact === false){
+        alert("預訂選項及聯絡人資料未填寫正確")
+        return
+      }else if(this.bookData === false){
+        alert("預定選項未填寫正確")
+        return
+      }else if(this.mainContact === false){
+        alert("聯絡人資料未填寫正確")
+        return
+      }else{
+        this.isPosting = true
+        dataUrl_post({
+          ...this.bookData,
+          ...this.mainContact,
+          note: this.note || '無', 
+          bookNumber: `${this.componentType === 'planeTicket'? '票' : this.componentType === 'hotel' ? '住' : '租'}-${Math.floor(Math.random()*10000)}`,
+          bookDate: formatISO(new Date(), {representation: 'date'}),
+          state: this.stateConvert,
+        }).then(() => {
+          this.successFn(() => {
+            this.$router.go(0);
+            window.scrollTo(0, 0);
+          }, 3000)
+        }).catch(err => {
+          alert(err)
+          this.isPosting = false
+        })
+      }
+    },
+    successFn(callback, delay){
+      this.MSG_POPUP_HANDLER({txt: '送出成功！', status: 'success'}, 1000)
+      setTimeout(callback, delay)
+    }
+  },
+  beforeDestroy(){
+    window.removeEventListener('scroll', this.scrollFn)
+    this.scrollFn = null
+  }
 }
 </script>
 
 <style lang="sass">
 .content
-	margin-top: 170px
+  margin-top: 170px
 select
-	width: 100%
-	border: 0
-	appearance: none
+  width: 100%
+  border: 0
+  appearance: none
 .ta-right select
-	direction: rtl
+  direction: rtl
 .disabled
-	opacity: 0.2
+  opacity: 0.2
 .inputGroup.width-half input[type="date"]
-	white-space: nowrap
+  white-space: nowrap
+.btn.block
+  background-color: #ddd
+  border: 1px solid #ddd
+  cursor: initial
 </style>

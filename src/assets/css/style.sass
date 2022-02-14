@@ -4,326 +4,291 @@
 @import 'RWD'
 
 .header
-	position: fixed
-	top: calc(0px + env(safe-area-inset-top))
-	left: 0
-	width: 100%
-	height: 60px
-	line-height: 60px
-	background: $primary
-	text-align: center
-	z-index: 19
-	transition: 0.3s all
-	span
-		color: #fff
+  position: fixed
+  top: calc(0px + env(safe-area-inset-top))
+  left: 0
+  width: 100%
+  height: 60px
+  line-height: 60px
+  background: $primary
+  text-align: center
+  z-index: 19
+  transition: 0.3s all
+  span
+    color: #fff
 .goToPage
-	@extend %verticalMiddle
-	display: inline-flex
-	align-items: center
-	span
-		color: #fff
-	img
-		width: 24px
-		height: 24px
-	&.goToHistory
-		right: 8px
-		img
-			animation: arrow-right 1s infinite
-	&.goToHome
-		left: 8px
-		img
-			transform: rotate(180deg)
+  @extend %verticalMiddle
+  display: inline-flex
+  align-items: center
+  span
+    color: #fff
+  img
+    width: 24px
+    height: 24px
+  &.goToHistory
+    right: 8px
+    img
+      animation: arrow-right 1s infinite
+  &.goToHome img
+      transform: rotate(180deg)
 @keyframes arrow-right
-	100%
-		transform: translateX(10px)
+  100%
+    transform: translateX(10px)
 .tabsGroup
-	position: fixed
-	top: calc(60px + env(safe-area-inset-top))
-	left: 0
-	display: inline-flex
-	justify-content: space-around
-	width: 100%
-	height: 72px
-	padding: 0 36px
-	background: $primary
-	z-index: 20
-	transition: 0.2s all
-	&::before
-		content: ''
-		position: absolute
-		left: 0
-		top: 100%
-		width: 0
-		height: 0
-		border-left: 50vw solid transparent
-		border-right: 50vw solid transparent
-		border-top: 24px solid $primary
-		transition: 0.2s all
-		z-index: -1
-	&.scroll
-		top: calc(0px + env(safe-area-inset-top))
-		height: 60px
-		&::before
-			top: 0
-		.tab_img
-			width: 36px
-			height: 36px
-			+ span
-				display: none
-		img
-			width: 18px
+  position: fixed
+  top: calc(60px + env(safe-area-inset-top))
+  left: 0
+  display: inline-flex
+  justify-content: space-around
+  width: 100%
+  height: 72px
+  padding: 0 36px
+  background: $primary
+  z-index: 20
+  transition: 0.2s all
+  &::before
+    content: ''
+    position: absolute
+    left: 0
+    top: 100%
+    width: 0
+    height: 0
+    border-left: 50vw solid transparent
+    border-right: 50vw solid transparent
+    border-top: 24px solid $primary
+    transition: 0.2s all
+    z-index: -1
+  &.scroll
+    top: calc(0px + env(safe-area-inset-top))
+    height: 60px
+    &::before
+      top: 0
+    .tab_img
+      width: 36px
+      height: 36px
+      + span
+        display: none
+    img
+      width: 18px
 .tab
-	background: none
-	border: 0
-	img
-		@extend %centerMiddle
-		width: 24px
-		transition: 0.2s all
-	span
-		font-size: 14px
-		transition: 0.2s all
-	&.active .tab_img
-		background: $decorative
-		opacity: 1
-		+ span
-			color: $decorative
-			opacity: 1
+  background: none
+  border: 0
+  img
+    @extend %centerMiddle
+    width: 24px
+    transition: 0.2s all
+  span
+    font-size: 14px
+    transition: 0.2s all
+  &.active .tab_img
+    background: $decorative
+    opacity: 1
+    + span
+      color: $decorative
+      opacity: 1
 .tab_img
-	position: relative
-	width: 48px
-	height: 48px
-	margin-bottom: 4px
-	border-radius: 50%
-	background: #fff
-	opacity: 0.4
-	transition: 0.2s all
-	+ span
-		color: #fff
-		opacity: 0.4
+  position: relative
+  width: 48px
+  height: 48px
+  margin-bottom: 4px
+  border-radius: 50%
+  background: #fff
+  opacity: 0.4
+  transition: 0.2s all
+  + span
+    color: #fff
+    opacity: 0.4
 .card
-	width: calc(100% - 12px * 2)
-	padding: 18px
-	margin: 0 auto
-	border-radius: 4px
-	box-shadow: 0 0 16px rgba(0,0,0,0.2)
-	background: $white
-	p
-		margin: 2px 0
-	&.card-bd0088
-		border-radius: 0 0 4px 4px
-	input
-		border: 1px solid #dfdcd7
-		transition: 0.3s all
-		&:focus
-			border-color: $secondary
+  width: calc(100% - 12px * 2)
+  padding: 18px
+  margin: 0 auto
+  border-radius: 4px
+  box-shadow: 0 0 16px rgba(0,0,0,0.2)
+  background: $white
+  p
+    margin: 2px 0
+  &.card-bd0088
+    border-radius: 0 0 4px 4px
+  input
+    border: 1px solid #dfdcd7
+    transition: 0.3s all
+    &:focus
+      border-color: $secondary
 .listGroup_bg
-	margin-bottom: 16px
-	padding: 8px 0
-	background: $white
+  margin-bottom: 16px
+  padding: 8px 0
+  background: $white
 .listGroup
-	position: relative
-	display: inline-flex
-	justify-content: space-between
-	align-items: center
-	width: 100%
-	padding: 0 12px
-	margin-bottom: 8px
-	.title
-		width: 88px
-	input
-		width: calc(100% - 88px)
-		margin: 0
-		&::placeholder
-			font-size: 14px
-			color: #aaa
+  position: relative
+  display: inline-flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  padding: 0 12px
+  margin-bottom: 8px
+  .title
+    width: 88px
+  input
+    width: calc(100% - 88px)
+    margin: 0
+    &::placeholder
+      font-size: 14px
+      color: #aaa
 .card_tabsGroup
-	width: calc(100% - 12px * 2)
-	margin: 0 auto
-	font-size: 0
+  width: calc(100% - 12px * 2)
+  margin: 0 auto
+  font-size: 0
 .card_tab
-	display: inline-block
-	width: 50%
-	height: 40px
-	border-radius: 4px 4px 0 0
-	background: $gray-light
-	text-align: center
-	vertical-align: bottom
-	span
-		line-height: 40px
-	&.active
-		height: 60px
-		border-radius: 4px 4px 0 0
-		background: $white
-		span
-			line-height: 60px
+  display: inline-block
+  width: 50%
+  height: 40px
+  border-radius: 4px 4px 0 0
+  background: $gray-light
+  text-align: center
+  vertical-align: bottom
+  span
+    line-height: 40px
+  &.active
+    height: 60px
+    border-radius: 4px 4px 0 0
+    background: $white
+    span
+      line-height: 60px
 .inputGroup
-	position: relative
-	width: 100%
-	&.width-half
-		display: inline-block
-		width: 47%
-	input
-		height: 40px
-		margin: 0
-		&:focus
-			~ label
-				color: $secondary
-				transform: translateY(-135%) scale(0.75)
-		&:valid
-			~ label
-				color: $secondary
-				transform: translateY(-135%) scale(0.75)
-	label
-		@extend %verticalMiddle
-		left: 12px
-		transform-origin: top left
-		color: rgba(0,0,0,0.6)
-		transition: all 0.2s
-		z-index: 15
-		&:before
-			content: ''
-			position: absolute
-			left: -4px
-			top: -2px
-			width: calc(100% + 8px)
-			height: calc(100% + 4px)
-			background: $white
-			z-index: -1
+  position: relative
+  width: 100%
+  &.width-half
+    display: inline-block
+    width: 47%
+  input
+    height: 40px
+    margin: 0
+    &:focus
+      ~ label
+        color: $secondary
+        transform: translateY(-135%) scale(0.75)
+    &:valid
+      ~ label
+        color: $secondary
+        transform: translateY(-135%) scale(0.75)
+  label
+    @extend %verticalMiddle
+    left: 12px
+    transform-origin: top left
+    color: rgba(0,0,0,0.6)
+    transition: all 0.2s
+    z-index: 15
+    &:before
+      content: ''
+      position: absolute
+      left: -4px
+      top: -2px
+      width: calc(100% + 8px)
+      height: calc(100% + 4px)
+      background: $white
+      z-index: -1
 .floatTitle
-	position: absolute
-	left: 8px
-	top: 0
-	&:before
-		content: ''
-		position: absolute
-		left: -4px
-		top: -2px
-		width: 56px
-		height: 20px
-		background: $white
-.guestInfo
-	margin: 8px 0 16px
-	font-size: 0
+  position: absolute
+  left: 8px
+  top: 0
+  &:before
+    content: ''
+    position: absolute
+    left: -4px
+    top: -2px
+    width: 56px
+    height: 20px
+    background: $white
 .separateLine
-	display: inline-flex
-	justify-content: space-around
-	align-items: center
-	width: 100%
-	hr
-		width: 40%
-	img
-		position: relative
-		width: 24px
-		height: 24px
-		animation: infinite 1.2s both infinite
-		@keyframes infinite
-			0%
-				top: -10px
-			100%
-				top: 10px
+  display: inline-flex
+  justify-content: space-around
+  align-items: center
+  width: 100%
+  hr
+    width: 40%
+  img
+    position: relative
+    width: 24px
+    height: 24px
+    animation: infinite 1.2s both infinite
+    @keyframes infinite
+      0%
+        top: -10px
+      100%
+        top: 10px
 
 input[type="radio"]
-	display: none
-	&:checked ~ .customRadio::before
-		background: $primary
-	&:checked ~ .tab .tab_img
-		background: #fff
-		opacity: 1
-		& + span
-			opacity: 1
+  display: none
+  &:checked ~ .customRadio::before
+    background: $primary
+  &:checked ~ .tab .tab_img
+    background: #fff
+    opacity: 1
+    & + span
+      opacity: 1
 .customRadioOuter
-	display: inline-flex
-	align-items: center
-	padding: 0 12px
+  display: inline-flex
+  align-items: center
+  padding: 0 12px
 .customRadio
-	position: relative
-	display: inline-block
-	width: 16px
-	height: 16px
-	margin-right: 4px
-	border-radius: 50%
-	border: 1px solid $primary
-	&::before
-		content: ''
-		@extend %centerMiddle
-		width: 10px
-		height: 10px
-		border-radius: 50%
+  position: relative
+  display: inline-block
+  width: 16px
+  height: 16px
+  margin-right: 4px
+  border-radius: 50%
+  border: 1px solid $primary
+  &::before
+    content: ''
+    @extend %centerMiddle
+    width: 10px
+    height: 10px
+    border-radius: 50%
 
 /* booking_history */
-.segmentControl
-	margin-top: 72px
-	text-align: center
-.segment
-	display: inline-flex
-	justify-content: center
-	width: calc((100% - 12px * 2) / 3)
-	padding: 4px 0
-	border: 1px solid $primary
-	&:first-of-type
-		border-radius: 4px 0 0 4px
-	&:nth-of-type(2)
-		border-left-width: 0
-		border-right-width: 0
-	&:last-of-type
-		border-radius: 0 4px 4px 0
-	&.active
-		background: $primary
-		span
-			color: #fff
-.historyList_createDate
-	@extend %verticalMiddle
-	left: 154px
-.historyList_status
-	@extend %verticalMiddle
-	right: 30px
-	&:before
-		content: ''
-		@extend %verticalMiddle
-		left: calc(100% + 4px)
-		width: 16px
-		height: 16px
-		background-image: url('../images/down-arrow.svg')
-	&.active:before
-		transform: translateY(-50%) rotate(180deg)
-
-/* headerAndFilter */
-.inputGroup_content
-	display: inline-flex
-	align-items: center
-.btn_count
-	position: relative
-	width: 24px
-	height: 24px
-	border-radius: 50%
-	border: 1px solid $secondary
-	background: none
-	&.minus
-		margin-right: 16px
-		&:before
-			content: ''
-			@extend %centerMiddle
-			width: 8px
-			height: 1px
-			background: $secondary
-	&.plus
-		margin-left: 16px
-		&:before
-			content: ''
-			@extend %centerMiddle
-			width: 8px
-			height: 1px
-			background: $secondary
-		&:after
-			content: ''
-			@extend %centerMiddle
-			transform: translate(-50%,-50%) rotate(90deg)
-			width: 8px
-			height: 1px
-			background: $secondary
-
-/* appFooter */
-.footer
-	margin-top: 36px
-	padding: 18px
-	background: #22252f
+.historyList
+  position: relative
+  display: inline-flex
+  align-items: center
+  width: 100%
+  height: 48px
+  padding: 12px
+  margin-top: 8px
+  background: #fff
+  &:nth-of-type(2)
+    margin-top: calc(60px + 16px)
+  > span:first-child
+    padding-right: 4px
+  &_createDate
+    @extend %verticalMiddle
+    left: 154px
+  &_status
+    @extend %verticalMiddle
+    right: 30px
+    &:before
+      content: ''
+      @extend %verticalMiddle
+      left: calc(100% + 4px)
+      width: 16px
+      height: 16px
+      background-image: url('~@/assets/images/down-arrow.svg')
+    &.active:before
+      transform: translateY(-50%) rotate(180deg)
+.undo
+  color: #ff8080
+.doing
+  color: #85a1ff
+.done
+  color: #64b964
+.historyContainer
+  display: none
+  padding-bottom: 12px
+  border-top: 1px solid rgba(0,0,0,0.15)
+  background: #fff
+  &.active
+    display: block
+  .historyContent
+    padding: 12px
+    .row
+      width: 100%
+      padding: 12px 18px 0

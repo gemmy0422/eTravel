@@ -4,14 +4,24 @@
 		<router-link to="/history" class="fz-0">History</router-link>
 		<router-view/>
 		<appFooter></appFooter>
+		<msgPopup v-if="isShowMsgPopup" />
+		<loadingMask v-if="isLoading" />
 	</div>
 </template>
 
 <script>
-import appFooter from './components/footer'
+import { mapGetters } from 'vuex'
+import appFooter from './components/common/Footer'
+import msgPopup from '@/components/common/msgPopup'
+import loadingMask from '@/components/common/loadingMask'
 export default {
 	components:{
 		appFooter,
+		msgPopup,
+		loadingMask
+	},
+	computed: {
+		...mapGetters(['isShowMsgPopup', 'isLoading'])
 	}
 }
 </script>
