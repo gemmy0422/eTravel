@@ -51,13 +51,13 @@ export default {
   computed:{
     ...mapGetters(['bookData', 'isLoading']),
     history_planeTicket(){
-      return this.histories ? this.histories.filter(item => item.planeTicket !== undefined) : []
+      return this.histories ? this.histories.filter(item => item.bookNumber.includes('票')) : []
     },
     history_hotel(){
-      return this.histories ? this.histories.filter(item => item.hotel !== undefined) : []
+      return this.histories ? this.histories.filter(item => item.bookNumber.includes('住')) : []
     },
     history_rentCar(){
-      return this.histories ? this.histories.filter(item => item.rentCar !== undefined) : []
+      return this.histories ? this.histories.filter(item => item.bookNumber.includes('租')) : []
     }
   },
   mounted(){

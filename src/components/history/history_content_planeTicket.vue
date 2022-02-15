@@ -17,33 +17,33 @@
         <div class="row">
           <div class="col-6 ta-left">
             <p><span class="fz-12 text-secondary">出發地</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.departureLocation }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.require.departureLocation }}</span></p>
           </div>
           <div class="col-6 ta-right">
             <p><span class="fz-12 text-secondary">目的地</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.terminalLocation }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.optional.terminalLocation }}</span></p>
           </div>
         </div>
         <div class="row">
           <div class="col-6 ta-left">
             <p><span class="fz-12 text-secondary">出發日</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.departureDate }}</span><span class="text-primary">{{ departureWeekDay }}</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.departureTime }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.require.departureDate }}</span><span class="text-primary">{{ departureWeekDay }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.require.departureTime }}</span></p>
           </div>
-          <div class="col-6 ta-right" v-if="history.planeTicket.terminalDate !== 'null'">
+          <div class="col-6 ta-right" v-if="history.terminalDate !== 'null'">
             <p><span class="fz-12 text-secondary">回程日</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.terminalDate }}</span><span class="text-primary">{{ terminalWeekDay }}</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.terminalTime }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.optional.terminalDate }}</span><span class="text-primary">{{ terminalWeekDay }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.optional.terminalTime }}</span></p>
           </div>
         </div>
         <div class="row">
           <div class="col-6 ta-left">
             <p><span class="fz-12 text-secondary">艙等偏好</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.planeClass }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.require.planeClass }}</span></p>
           </div>
           <div class="col-6 ta-right">
             <p><span class="fz-12 text-secondary">航空公司偏好</span></p>
-            <p><span class="fz-20 text-primary">{{ history.planeTicket.planeCompany }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.require.planeCompany }}</span></p>
           </div>
         </div>
       </div>
@@ -76,10 +76,10 @@ export default {
   },
   computed: {
     departureWeekDay(){
-      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.planeTicket.departureDate)) - 1]}`
+      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.require.departureDate)) - 1]}`
     },
     terminalWeekDay(){
-      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.planeTicket.terminalDate)) - 1]}`
+      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.optional.terminalDate)) - 1]}`
     }
   }
 }
