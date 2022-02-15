@@ -1,6 +1,8 @@
 # Side Project: etravel
 ## 製作這個side project的目的是把所有會的技術融合在一起，組合成一個完整的網頁，隨著技術的精進我會持續升級更新
 ```
+https://gemmy0422.github.io/eTravel/
+```
 yarn install
 ```
 ### Compiles and hot-reloads for development
