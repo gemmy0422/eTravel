@@ -1,5 +1,5 @@
-# etravel
-##
+# Side Project: etravel
+## 製作這個side project的目的是把所有會的技術融合在一起，組合成一個完整的網頁，隨著技術的精進我會持續升級更新
 ```
 yarn install
 ```
@@ -11,7 +11,7 @@ yarn run serve
 ```
 yarn run build
 ```
-##### v1.0.2
+#### v1.0.2
 ###### 新增
 * 封裝storage
 * 封裝api並擴充cache api 返回數據功能
