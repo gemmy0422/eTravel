@@ -18,8 +18,8 @@
         <CustomInput :inputType="'time'" :inputId="'input-start-time'" v-model="planeTicket.require.departureTime" placeholder="ex: 12:00" :labelTitle="'出發時間'" @input="departureTimeFn" />
       </div>
       <div class="row" v-if="!isSingle">
-        <CustomInput :inputType="'date'" :inputId="'input-end-date'" v-model="planeTicket.require.terminalDate" placeholder="ex: 2000-01-01" :labelTitle="'回程日'" @input="terminalDateFn" />
-        <CustomInput :inputType="'time'" :inputId="'input-end-time'" v-model="planeTicket.require.terminalTime" placeholder="ex: 12:00" :labelTitle="'回程時間'" @input="terminalTimeFn" />
+        <CustomInput :inputType="'date'" :inputId="'input-end-date'" v-model="planeTicket.optional.terminalDate" placeholder="ex: 2000-01-01" :labelTitle="'回程日'" @input="terminalDateFn" />
+        <CustomInput :inputType="'time'" :inputId="'input-end-time'" v-model="planeTicket.optional.terminalTime" placeholder="ex: 12:00" :labelTitle="'回程時間'" @input="terminalTimeFn" />
       </div>
       <div class="row">
         <PersonAmount :mainTitle="'旅客人數'" :itemTitleLeft="'成人'" :itemTitleRight="'兒童'" :amountAdult="planeTicket.require.planeAdult" :amountChild="planeTicket.require.planeChild"
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { isAfter, parseISO } from 'date-fns'
 import PersonAmount from './common/PersonAmount'
 import CustomInput from './common/CustomInput'
@@ -90,6 +91,7 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['dateErrorFn']),
     typeChange(val){
       this.isSingle = val
       if(val){
@@ -105,12 +107,14 @@ export default {
     },
     verifyDate(){
       if(isAfter(parseISO(this.planeTicket.require.departureDate), parseISO(this.planeTicket.optional.terminalDate))){
-        alert('日期錯誤')
+        this.dateErrorFn(true)
         this.planeTicket.require.departureDate = '';
         this.planeTicket.optional.terminalDate = '';
+        alert('日期錯誤')
+      }else{
+        this.dateErrorFn(false)
       }
     },
-    // emit
     addAdult(){
       this.planeTicket.require.planeAdult += 1
     },
@@ -125,11 +129,9 @@ export default {
     },
     departureLocationFn(val){
       this.planeTicket.require.departureLocation = val
-      this.verifyDate()
     },
     terminalLocationFn(val){
       this.planeTicket.require.terminalLocation = val
-      this.verifyDate()
     },
     departureDateFn(val){
       this.planeTicket.require.departureDate = val
@@ -137,15 +139,13 @@ export default {
     },
     departureTimeFn(val){
       this.planeTicket.require.departureTime = val
-      this.verifyDate()
     },
     terminalDateFn(val){
-      this.planeTicket.require.terminalDate = val
+      this.planeTicket.optional.terminalDate = val
       this.verifyDate()
     },
     terminalTimeFn(val){
-      this.planeTicket.require.terminalTime = val
-      this.verifyDate()
+      this.planeTicket.optional.terminalTime = val
     }
   }
 }

@@ -112,7 +112,6 @@ export default {
     goToHistory(){
       this.$router.push({name: "History"})
     },
-    // emit
     bookDataVal(val){
       this.bookData = val
     },

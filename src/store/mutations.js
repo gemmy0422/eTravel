@@ -19,6 +19,9 @@ const mutations = {
   },
   hideLoading(state){
     state.isLoading = false
+  },
+  dateErrorFn(state, data){
+    state.dateError = data
   }
 }
 export { mutations }

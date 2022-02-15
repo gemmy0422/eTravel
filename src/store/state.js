@@ -3,6 +3,7 @@ const state = {
   isShowMsgPopup: false,
   msgStatus: '',
   msgContext: '',
-  isLoading: false
+  isLoading: false,
+  dateError: false
 }
 export { state }

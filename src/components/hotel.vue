@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { isAfter, parseISO } from 'date-fns'
 import PersonAmount from './common/PersonAmount'
 import CustomInput from './common/CustomInput'
@@ -49,17 +50,20 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['dateErrorFn']),
     hotelVal(val){
       this.$emit('hotelVal', val)
     },
     verifyDate(){
       if(isAfter(parseISO(this.bookData.hotel.checkInDate), parseISO(this.bookData.hotel.checkOutDate))){
+        this.dateErrorFn(true)
         this.bookData.hotel.checkInDate = '';
         this.bookData.hotel.checkOutDate = '';
         alert('日期錯誤');
+      }else{
+        this.dateErrorFn(false)
       }
     },
-    // emit
     addAdult(){
       this.bookData.hotel.hotelAdult += 1
     },

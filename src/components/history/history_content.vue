@@ -58,9 +58,6 @@ export default {
     },
     history_rentCar(){
       return this.histories ? this.histories.filter(item => item.rentCar !== undefined) : []
-    },
-    data_reminder(){
-      return this.histories.length ? '' : '目前尚未有預訂紀錄'
     }
   },
   mounted(){

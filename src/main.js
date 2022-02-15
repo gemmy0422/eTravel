@@ -4,7 +4,7 @@ import store from './store/store'
 import App from './App.vue'
 import './registerServiceWorker'
 import './assets/css/style.sass'
-import('./utils/debugs/eruda.js')
+// import('./utils/debugs/eruda.js')
 
 const VueScrollTo = require('vue-scrollto');
 Vue.use(VueScrollTo, {

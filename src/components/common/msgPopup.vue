@@ -11,7 +11,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'msgPopup',
+  name: 'MsgPopup',
   computed: {
     ...mapGetters(['msgContext', 'msgStatus'])
   }

@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <p class="fz-12 ta-center copyright">Copyright © 2020 eTravel. All rights reserved</p>
+    <p class="fz-12 ta-center copyright">Copyright © 2022 eTravel. All rights reserved</p>
   </div>
 </template>
 

@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { isAfter, parseISO } from 'date-fns'
 export default {
   name: 'rentCar',
@@ -68,14 +69,18 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['dateErrorFn']),
     rentCarVal(val){
       this.$emit('rentCarVal', val)
     },
     verifyDate(){
       if(isAfter(parseISO(this.rentCar.startDate), parseISO(this.rentCar.endDate))){
-        alert('日期錯誤');
+        this.dateErrorFn(true)
         this.rentCar.startDate = '';
         this.rentCar.endDate = '';
+        alert('日期錯誤');
+      }else{
+        this.dateErrorFn(false)
       }
     }
   }

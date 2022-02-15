@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { formatISO, addYears } from 'date-fns'
 export default {
   name: 'CustomInput',
@@ -40,12 +41,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['dateError']),
     parentVModelValue(){
       return this.$attrs.value
     }
   },
   created(){
-    this.inputBindVal = this.parentVModelValue
     if(this.inputType === 'date'){
       this.minDate = formatISO(new Date(), { representation: 'date' })
       this.maxDate = formatISO(new Date(addYears(new Date(this.minDate), 1)), { representation: 'date' })
@@ -61,8 +62,8 @@ export default {
   methods: {
     changeFn(){
       this.$emit('input', this.inputBindVal)
-      if(this.inputType === 'date'){
-        this.$emit('verifyDate')
+      if(this.dateError){
+        this.inputBindVal = ''
       }
     }
   }

@@ -6,8 +6,7 @@
 
 <script>
 export default {
-  name: 'loadingMask',
-  
+  name: 'LoadingMask'
 }
 </script>
 
