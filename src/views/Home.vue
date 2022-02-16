@@ -167,7 +167,7 @@ export default {
 
 <style lang="sass">
 .content
-  margin-top: 170px
+  padding-top: 170px
 select
   width: 100%
   border: 0

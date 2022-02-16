@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="segmentControl fz-0">
+    <div class="ta-center fz-0">
       <div v-for="(item, index) in tabs" :key="index" class="segment" :class="{active: historyType === item}" @click="clickTab(item)" v-scroll-to="'#app'">
         <span class="fz-14 text-primary">{{ item }}</span>
       </div>
@@ -82,9 +82,8 @@ export default {
 
 <style lang="sass" scoped>
 @import '@/assets/css/var'
-.segmentControl
-  margin-top: 72px
-  text-align: center
+.container
+  padding-top: 72px
 .segment
   display: inline-flex
   justify-content: center

@@ -1,5 +1,5 @@
 <template>
-  <div class="footer ta-center">
+  <div class="footer ta-center" :style="{'height': footerHeight}">
     <div class="row ta-left row-md">
       <div class="col-12 col-lg-3 col-md-4 xs-mb-30" @click="notice">
         <p class="fz-18 fw-bold pb-8">Intro</p>
@@ -60,13 +60,24 @@ export default {
       imgFB: require('@/assets/images/facebook.svg'),
       imgYT: require('@/assets/images/youtube.svg'),
       imgLine: require('@/assets/images/line.svg'),
-      imgTelegram: require('@/assets/images/telegram.svg')
+      imgTelegram: require('@/assets/images/telegram.svg'),
+      footerHeight: ''
     }
+  },
+  mounted(){
+    window.addEventListener('resize', () => {this.resizeStyle()})
   },
   methods:{
     notice(){
       alert("目前尚未開放");
+    },
+    resizeStyle(){
+      this.footerHeight = window.innerWidth < 800 ?
+        `${document.body.clientHeight - 36 - document.querySelector('.container').clientHeight}px` : 'auto'
     }
+  },
+  beforeDestroy(){
+    window.removeEventListener('resize', () => {this.resizeStyle()})
   }
 }
 </script>
