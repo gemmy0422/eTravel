@@ -27,3 +27,7 @@ yarn run build
 ###### 優化
 * 減少數據架構層級
 * 從共用style拆分特殊樣式css到各component內
+
+#### 預期新增功能
+* Unit-test
+* SvgFont
