@@ -19,8 +19,8 @@
     align-items: flex-start
   @for $i from 1 through 12
     .col-md-#{$i}
-      width: 100% / 12 * $i !important
-      flex: 0 0 100% / 12 * $i
+      width: calc(100% / 12 * $i) !important
+      flex: 0 0 calc(100% / 12 * $i)
   .xs-mb-30
     margin-bottom: 0 !important
 
@@ -52,8 +52,8 @@
     padding: 12px 12px 0
   @for $i from 1 through 12
     .col-lg-#{$i}
-      width: 100% / 12 * $i !important
-      flex: 0 0 100% / 12 * $i
+      width: calc(100% / 12 * $i) !important
+      flex: 0 0 calc(100% / 12 * $i)
   .btn
     height: 48px
     line-height: 48px

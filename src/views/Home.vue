@@ -146,7 +146,7 @@ export default {
           this.successFn(() => {
             this.$router.go(0);
             window.scrollTo(0, 0);
-          }, 3000)
+          }, 2000)
         }).catch(err => {
           alert(err)
           this.isPosting = false
