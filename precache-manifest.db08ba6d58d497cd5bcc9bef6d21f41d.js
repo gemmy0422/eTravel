@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a7fb6c148e9a568f49ff",
-    "url": "/eTravel/css/app.eb2b21a8.css"
+    "revision": "0b49e71542c213e10cdf",
+    "url": "/eTravel/css/app.d21f9f0c.css"
   },
   {
     "revision": "2be11bea88c12fae6dff8fbc9b6f0aab",
@@ -44,23 +44,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/eTravel/img/youtube.f4aa0592.svg"
   },
   {
-    "revision": "2fbcc68eec7d306d5602a8f53216e44c",
+    "revision": "f5260b8b4837ad9fd1372bde5c3547a7",
     "url": "/eTravel/index.html"
   },
   {
-    "revision": "a7fb6c148e9a568f49ff",
-    "url": "/eTravel/js/app.3f3128bb.js"
+    "revision": "0b49e71542c213e10cdf",
+    "url": "/eTravel/js/app.a0c728c4.js"
   },
   {
-    "revision": "a268c45198a39ee69183",
-    "url": "/eTravel/js/chunk-vendors.c6852701.js"
+    "revision": "c5ebf2ccaab7fbf36413",
+    "url": "/eTravel/js/chunk-vendors.55b98432.js"
   },
   {
     "revision": "374f32a80f8c54b9dfaf331595da1d65",
     "url": "/eTravel/manifest.json"
   },
   {
-    "revision": "735ab4f94fbcd57074377afca324c813",
+    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/eTravel/robots.txt"
   }
 ]);
