@@ -1,40 +1,19 @@
 <template>
   <div class="card fz-0">
     <div class="row">
-      <div class="inputGroup width-half">
-        <input type="text" id="input-start-rent" v-model="rentCar.startLocation"/>
-        <label for="input-start-rent" class="">租車地</label>
-      </div>
-      <div class="inputGroup width-half">
-        <input type="text" id="input-end-rent" v-model="rentCar.endLocation"/>
-        <label for="input-end-rent" class="">還車地</label>
-      </div>
+      <CustomInput :inputType="'text'" :inputId="'input-start-rent'" v-model="rentCar.startLocation" :labelTitle="'租車地'" @input="startLocationFn" />
+      <CustomInput :inputType="'text'" :inputId="'input-end-rent'" v-model="rentCar.endLocation" :labelTitle="'還車地'" @input="endLocationFn" />
     </div>
     <div class="row">
-      <div class="inputGroup width-half">
-        <input type="date" v-model="rentCar.startDate" @change="verifyDate" placeholder="ex: 2000-01-01"/>
-        <label class="">租車日</label>
-      </div>
-      <div class="inputGroup width-half">
-        <input type="time" id="input-start-time-rentCar" v-model="rentCar.startTime" placeholder="ex: 12:00"/>
-        <label for="input-start-time-rentCar" class="">租車時間</label>
-      </div>
+      <CustomInput :inputType="'date'" :inputId="'input-start-date'" v-model="rentCar.startDate" placeholder="ex: 2000-01-01" :labelTitle="'租車日'" @input="startDateFn" />
+      <CustomInput :inputType="'time'" :inputId="'input-start-time-rentCar'" v-model="rentCar.startTime" placeholder="ex: 12:00" :labelTitle="'租車時間'" @input="startTimeFn" />
     </div>
     <div class="row">
-      <div class="inputGroup width-half">
-        <input type="date" v-model="rentCar.endDate" @change="verifyDate" placeholder="ex: 2000-01-01"/>
-        <label class="">還車日</label>
-      </div>
-      <div class="inputGroup width-half">
-        <input type="time" id="input-end-time-rentCar" v-model="rentCar.endTime" placeholder="ex: 12:00"/>
-        <label for="input-end-time-rentCar" class="">還車時間</label>
-      </div>
+      <CustomInput :inputType="'date'" :inputId="'input-end-date'" v-model="rentCar.endDate" placeholder="ex: 2000-01-01" :labelTitle="'還車日'" @input="endDateFn" />
+      <CustomInput :inputType="'time'" :inputId="'input-end-time-rentCar'" v-model="rentCar.endTime" placeholder="ex: 12:00" :labelTitle="'還車時間'" @input="endTimeFn" />
     </div>
     <div class="row">
-      <div class="inputGroup">
-        <input type="text" id="input-car" v-model="rentCar.preferCar"/>
-        <label for="input-car" class="">指定車款</label>
-      </div>
+      <CustomInput :inputType="'text'" :inputId="'input-car'" v-model="rentCar.preferCar" :labelTitle="'指定車款'" :isHalfWidth="false" @input="preferCarFn" />
     </div>
   </div>
 </template>
@@ -42,8 +21,12 @@
 <script>
 import { mapMutations } from 'vuex'
 import { isAfter, parseISO } from 'date-fns'
+import CustomInput from './common/CustomInput'
 export default {
   name: 'rentCar',
+  components: {
+    CustomInput
+  },
   data() {
     return {
       rentCar: {
@@ -82,6 +65,29 @@ export default {
       }else{
         this.dateErrorFn(false)
       }
+    },
+    startLocationFn(val){
+      this.rentCar.startLocation = val
+    },
+    endLocationFn(val){
+      this.rentCar.endLocation = val
+    },
+    startDateFn(val){
+      this.rentCar.startDate = val
+      this.verifyDate()
+    },
+    startTimeFn(val){
+      this.rentCar.startTime = val
+    },
+    endDateFn(val){
+      this.rentCar.endDate = val
+      this.verifyDate()
+    },
+    endTimeFn(val){
+      this.rentCar.endTime = val
+    },
+    preferCarFn(val){
+      this.rentCar.preferCar = val
     }
   }
 }

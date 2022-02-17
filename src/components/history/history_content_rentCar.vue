@@ -17,29 +17,29 @@
         <div class="row">
           <div class="col-6 ta-left">
             <p><span class="fz-12 text-secondary">租車地</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.startLocation }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.startLocation }}</span></p>
           </div>
           <div class="col-6 ta-right">
             <p><span class="fz-12 text-secondary">還車地</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.endLocation }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.endLocation }}</span></p>
           </div>
         </div>
         <div class="row">
           <div class="col-6 ta-left">
             <p><span class="fz-12 text-secondary">租車日</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.startDate }}</span><span class="text-primary">{{ startDay }}</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.startTime }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.startDate }}</span><span class="text-primary">{{ startDay }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.startTime }}</span></p>
           </div>
           <div class="col-6 ta-right">
             <p><span class="fz-12 text-secondary">還車日</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.endDate }}</span><span class="text-primary">{{ endDay }}</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.endTime }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.endDate }}</span><span class="text-primary">{{ endDay }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.endTime }}</span></p>
           </div>
         </div>
         <div class="row">
           <div class="col-6 ta-left">
             <p><span class="fz-12 text-secondary">指定車款</span></p>
-            <p><span class="fz-20 text-primary">{{ history.rentCar.preferCar }}</span></p>
+            <p><span class="fz-20 text-primary">{{ history.preferCar }}</span></p>
           </div>
         </div>
       </div>
@@ -72,10 +72,10 @@ export default {
   },
   computed: {
     startDay(){
-      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.rentCar.startDate)) - 1]}`
+      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.startDate)) - 1]}`
     },
     endDay(){
-      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.rentCar.endDate)) - 1]}`
+      return `週${['一','二','三','四','五','六','日'][getDay(parseISO(this.history.endDate)) - 1]}`
     }
   }
 }
