@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/eTravel/precache-manifest.a86154a0781acf45bf535eb30fe846dd.js"
+  "/eTravel/precache-manifest.64a406a3951599825b3941ed2ea9e998.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "etravel"});
