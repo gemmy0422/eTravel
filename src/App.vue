@@ -12,8 +12,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import appFooter from './components/common/Footer'
-import MsgPopup from '@/components/common/MsgPopup'
-import LoadingMask from '@/components/common/LoadingMask'
+import MsgPopup from '@/components/common/MsgPopup1'
+import LoadingMask from '@/components/common/LoadingMask1'
 export default {
 	components:{
 		appFooter,
