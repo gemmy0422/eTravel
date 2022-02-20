@@ -9,7 +9,7 @@
 
 export default {
   name: 'CustomList',
-  props:{
+  props: {
     type: {
       type: String,
       required: true,

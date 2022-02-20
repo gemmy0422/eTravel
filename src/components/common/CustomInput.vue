@@ -1,7 +1,7 @@
 <template>
   <div class="inputGroup" :class="{'width-half': isHalfWidth}">
     <input :type="inputType" :id="inputId" v-model="inputBindVal" :placeholder="placeholder" @change="changeFn" :min="minDate" :max="maxDate" />
-    <label for=inputId>{{ labelTitle }}</label>
+    <label :for="inputId">{{ labelTitle }}</label>
   </div>
 </template>
 
@@ -42,9 +42,6 @@ export default {
   },
   computed: {
     ...mapGetters(['dateError']),
-    parentVModelValue(){
-      return this.$attrs.value
-    }
   },
   created(){
     if(this.inputType === 'date'){
@@ -53,15 +50,18 @@ export default {
     }
   },
   watch: {
-    parentVModelValue(newVal){
+    ['$attrs.value'](newVal){
       if(newVal === ''){
         this.inputBindVal = ''
       }
     }
   },
   methods: {
-    changeFn(){
+    changeFnEmit(){
       this.$emit('input', this.inputBindVal)
+    },
+    changeFn(){
+      this.changeFnEmit()
       if(this.dateError){
         this.inputBindVal = ''
       }
