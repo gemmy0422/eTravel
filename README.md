@@ -8,9 +8,9 @@ yarn install
 ```
 yarn run serve
 ```
-### Compiles and minifies for production
+### Unit test for production
 ```
-yarn run build
+yarn test:unit
 ```
 #### v1.0.2
 ###### 新增
